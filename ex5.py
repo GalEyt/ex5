@@ -58,7 +58,7 @@ def process_files(dir_path: str, cipher: VigenereCipher, mode: str) -> None:
         file_path = os.path.join(dir_path, file)
         file_name = os.path.splitext(file)[0]
         file_type = os.path.splitext(file_path)[1]
-        if not os.path.splitext(file_path)[1] == file_type_to_process:
+        if not file_type == file_type_to_process:
             continue
         with open(file_path, 'r') as file_to_process:
             str_to_process = file_to_process.read()
