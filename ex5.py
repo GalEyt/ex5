@@ -47,7 +47,8 @@ class CaesarCipher(VigenereCipher):
 def getVigenereFromStr(keyString: str) -> VigenereCipher:
     vigenere_keys = []
     for letter in keyString:
-        vigenere_keys.append(string.ascii_letters.index(letter))
+        if letter.isalpha():
+            vigenere_keys.append(string.ascii_letters.index(letter))
     result = VigenereCipher(vigenere_keys)
     return result
 
@@ -80,6 +81,8 @@ def processDirectory(dir_path: str) -> None:
     cipher_key = loaded_config['key']
     if cipher_type == "Caesar":
         cipher = CaesarCipher(cipher_key)
+    elif isinstance(cipher_key, str):
+        cipher = getVigenereFromStr(cipher_key)
     else:
         cipher = VigenereCipher(cipher_key)
     process_files(dir_path, cipher, cipher_mode)
